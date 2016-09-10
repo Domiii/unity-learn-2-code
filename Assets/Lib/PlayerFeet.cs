@@ -2,19 +2,18 @@
 using System.Collections;
 
 public class PlayerFeet : MonoBehaviour {
-	public Player Player;
+	public Player player;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnTriggerEnter2D(Collider2D collider) {
+		print (collider.name);
+		if (collider.gameObject != player) {
+			++player.groundColliders;
+		}
 	}
 
-	void OnTriggerEnter() {
-		Player.
+	void OnTriggerExit2D(Collider2D collider) {
+		if (collider.gameObject != player) {
+			--player.groundColliders;
+		}
 	}
 }

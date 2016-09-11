@@ -5,7 +5,7 @@ public class PlayerFeet : MonoBehaviour {
 	public Player player;
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		print (collider.name);
+		//print (collider.name);
 		if (collider.gameObject != player) {
 			++player.groundColliders;
 		}

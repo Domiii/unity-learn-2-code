@@ -12,30 +12,27 @@ public class Platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		var move = Vector3.right * speed * Time.fixedDeltaTime;
+		var move = Vector2.right * speed * Time.fixedDeltaTime;
 		transform.Translate (move);
-//		if (player != null) {
-//			//var body = player.GetComponent<Rigidbody2D> ();
-//			//body.MovePosition (player.transform.position + move);
-//			player.transform.Translate(move);
-//		}
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		var collisionPlayer = collision.gameObject.GetComponent<Player> ();
+	void OnTriggerEnter2D(Collider2D other) {
+		var collisionPlayer = other.gameObject.GetComponent<Player> ();
 		if (collisionPlayer != null) {
 			// player entered platform
 			player = collisionPlayer;
-			player.pushSpeed += speed;
+			player.pushSpeedX += speed;
 		}
 	}
 
-	void OnCollisionExit2D(Collision2D collision) {
-		var collisionPlayer = collision.gameObject.GetComponent<Player> ();
-		if (collisionPlayer == player) {
-			// player left platform
-			player.pushSpeed -= speed;
-			player = null;
+	void OnTriggerExit2D(Collider2D other) {
+		if (player != null) {
+			var collisionPlayer = other.gameObject.GetComponent<Player> ();
+			if (collisionPlayer == player) {
+				// player left platform
+				player.pushSpeedX -= speed;
+				player = null;
+			}
 		}
 	}
 }

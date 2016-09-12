@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	public float speed = 3;
-	public float pushSpeed;
+	public float pushSpeedX;
 	public float jumpStrength = 9;
 	public int groundColliders;
 	bool jumping;
@@ -30,6 +30,6 @@ public class Player : MonoBehaviour {
 		}
 
 		body.velocity = v;
-		transform.Translate (pushSpeed * Time.fixedDeltaTime, 0, 0);
+		transform.Translate (pushSpeedX * Time.fixedDeltaTime, 0, 0);
 	}
 }

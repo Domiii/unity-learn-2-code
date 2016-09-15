@@ -31,5 +31,11 @@ public class Player : MonoBehaviour {
 
 		body.velocity = v;
 		transform.Translate (pushSpeedX * Time.fixedDeltaTime, 0, 0);
+
+		if (v.x!= 0) {
+			var scale = transform.localScale;
+			scale.x = -Mathf.Sign (v.x);
+			transform.localScale = scale;
+		}
 	}
 }

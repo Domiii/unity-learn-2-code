@@ -2,14 +2,29 @@
 using System.Collections;
 
 public class Cat : MonoBehaviour {
+	public float speed = 4;
+	public int collisionCount;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () {
-		transform.Translate (0.1f, 0, 0);
+		var body = GetComponent<Rigidbody2D> ();
+		var v = body.velocity;
+
+		v.x = Input.GetAxis ("Horizontal") * speed;
+
+		body.velocity = v;
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		print ("Enter: " + other.gameObject.name);
+		++collisionCount;
+	}
+
+	void OnCollisionStay2D(Collision2D other) {
+		print ("Stay: " + other.gameObject.name);
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		print ("Exit: " + other.gameObject.name);
+		--collisionCount;
 	}
 }

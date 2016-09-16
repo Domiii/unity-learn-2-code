@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 
 		if (v.x!= 0) {
 			var scale = transform.localScale;
-			scale.x = -Mathf.Sign (v.x);
+			scale.x = -Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
 			transform.localScale = scale;
 		}
 	}

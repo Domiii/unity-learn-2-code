@@ -26,12 +26,4 @@ public class Player : MonoBehaviour {
 			transform.localScale = scale;
 		}
 	}
-
-	void OnCollisionEnter2D(Collision2D collider) {
-		++colliderCount;
-	}
-
-	void OnCollisionExit2D(Collision2D collider) {
-		--colliderCount;
-	}
 }

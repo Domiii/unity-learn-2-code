@@ -5,17 +5,16 @@ public class CameraMover : MonoBehaviour {
 	public Vector2 move;
 	Player player;
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		var newPlayer = collider.GetComponent<Player>();
-		if (newPlayer != null) {
-			// player started colliding
-			player = newPlayer;
+	void OnTriggerEnter2D(Collider2D other) {
+		var triggerPlayer = other.gameObject.GetComponentInParent<Player> ();
+		if (triggerPlayer != null) {
+			player = triggerPlayer;
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D collider) {
-		if (collider.GetComponent<Player> () != null) {
-			// player stopped colliding
+	void OnTriggerExit2D(Collider2D other) {
+		var triggerPlayer = other.gameObject.GetComponentInParent<Player> ();
+		if (triggerPlayer != null) {
 			player = null;
 		}
 	}

@@ -26,14 +26,6 @@ public class CameraMover : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D other) {
-		var direction = (other.transform.position - transform.position).normalized;
-		var triggerPlayer = other.gameObject.GetComponentInParent<Player> ();
-		if (triggerPlayer == null) {
-			other.transform.Translate (direction * 0.05f);
-		}
-	}
-
 //	void OnTriggerStay2D(Collider2D other) {
 //		var player = other.gameObject.GetComponentInParent<Player>();
 //		if (player != null) {

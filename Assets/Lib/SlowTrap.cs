@@ -5,18 +5,18 @@ public class SlowTrap : MonoBehaviour {
 	public float speedFactor = 0.5f;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		var enterPlayer = other.GetComponent<Player> ();
-		if (enterPlayer != null) {
+		var triggerPlayer = other.GetComponent<Player> ();
+		if (triggerPlayer != null) {
 			// player entered!
-			enterPlayer.speed *= speedFactor;
+			triggerPlayer.speed *= speedFactor;
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
-		var exitPlayer = other.GetComponent<Player> ();
-		if (exitPlayer != null) {
+		var triggerPlayer = other.GetComponent<Player> ();
+		if (triggerPlayer != null) {
 			// player exited!
-			exitPlayer.speed /= speedFactor;
+			triggerPlayer.speed /= speedFactor;
 		}
 	}
 }

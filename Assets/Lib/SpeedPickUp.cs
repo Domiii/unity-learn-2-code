@@ -5,10 +5,10 @@ public class SpeedPickUp : MonoBehaviour {
 	public float speedFactor = 2;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		var enterPlayer = other.GetComponent<Player> ();
-		if (enterPlayer != null) {
+		var triggerPlayer = other.GetComponent<Player> ();
+		if (triggerPlayer != null) {
 			// player picked it up!	
-			enterPlayer.speed *= speedFactor;
+			triggerPlayer.speed *= speedFactor;
 			Destroy (gameObject);
 		}
 	}

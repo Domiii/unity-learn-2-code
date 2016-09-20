@@ -22,8 +22,14 @@ public class CameraMover : MonoBehaviour {
 	void FixedUpdate() {
 		if (player) {
 			var playerV = player.GetComponent<Rigidbody2D> ().velocity;
-			var vx = playerV.x + player.pushSpeedX;		// the actual horizontal player speed
-			Camera.main.transform.Translate (vx * Time.fixedDeltaTime, 0, 0);
+			var vx = Mathf.Abs(playerV.x);		// the actual horizontal player speed
+
+			var platform = player.platform;
+			if (platform != null) {
+				vx += Mathf.Abs(platform.speed);
+			}
+
+			Camera.main.transform.Translate (move.x * vx * Time.fixedDeltaTime, 0, 0);
 		}
 	}
 

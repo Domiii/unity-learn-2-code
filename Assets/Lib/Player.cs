@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	public float speed = 3;
-	public float pushSpeedX;
+	public float visSpeed;
 	public float jumpStrength = 9;
+	public Platform platform;
 	public int groundColliders;
 	bool jumping;
 
@@ -16,6 +17,9 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space) && groundColliders > 0) {
 			jumping = true;
 		}
+		var body = GetComponent<Rigidbody2D> ();
+		var v = body.velocity;
+		visSpeed = v.x;
 	}
 
 	void FixedUpdate () {
@@ -30,11 +34,10 @@ public class Player : MonoBehaviour {
 		}
 
 		body.velocity = v;
-		transform.Translate (pushSpeedX * Time.fixedDeltaTime, 0, 0);
 
 		if (v.x!= 0) {
 			var scale = transform.localScale;
-			scale.x = -Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
+			scale.x = Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
 			transform.localScale = scale;
 		}
 	}

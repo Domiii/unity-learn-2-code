@@ -19,24 +19,32 @@ public class CameraMover : MonoBehaviour {
 		}
 	}
 
+//	void FixedUpdate() {
+//		if (player) {
+//			var playerV = player.GetComponent<Rigidbody2D> ().velocity;
+//			var vx = Mathf.Abs(playerV.x);		// the actual horizontal player speed
+//
+//			var platform = player.platform;
+//			if (platform != null) {
+//				vx += Mathf.Abs(platform.speed);
+//			}
+//
+//			Camera.main.transform.Translate (move.x * vx * Time.fixedDeltaTime, 0, 0);
+//		}
+//	}
 	void FixedUpdate() {
 		if (player) {
 			var playerV = player.GetComponent<Rigidbody2D> ().velocity;
-			var vx = Mathf.Abs(playerV.x);		// the actual horizontal player speed
+			var delta = move;
+			delta.x *= Mathf.Abs(playerV.x);		// the actual horizontal player speed
+			delta.y *= Mathf.Abs(playerV.y);
 
 			var platform = player.platform;
 			if (platform != null) {
-				vx += Mathf.Abs(platform.speed);
+				delta.x += Mathf.Abs(platform.speed);
 			}
 
-			Camera.main.transform.Translate (move.x * vx * Time.fixedDeltaTime, 0, 0);
+			Camera.main.transform.Translate (delta * Time.fixedDeltaTime);
 		}
 	}
-
-//	void OnTriggerStay2D(Collider2D collider) {
-//		if (collider.GetComponent<Player> () != null) {
-//			// player collided with us
-//			Camera.main.transform.Translate(move.x, move.y, 0);
-//		}
-//	}
 }

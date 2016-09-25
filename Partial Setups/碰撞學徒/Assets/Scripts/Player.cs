@@ -3,27 +3,33 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	public float speed = 3;
-	public float jumpStrength = 9;
-	public int colliderCount;
+	public int collisionCount;
 
 	void Update() {
 		var body = GetComponent<Rigidbody2D> ();
 		var v = body.velocity;
-
 		v.x = Input.GetAxis ("Horizontal") * speed;
-
-		if (Input.GetKeyDown (KeyCode.Space) && colliderCount > 0) {
-			v.y = jumpStrength;
-		}
-
 		body.velocity = v;
 
 
-		//  face current walking direction
 		if (v.x != 0) {
 			var scale = transform.localScale;
-			scale.x = -Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
+			scale.x = Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
 			transform.localScale = scale;
 		}
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		print ("Enter: " + other.gameObject.name);
+		++collisionCount;
+	}
+
+	void OnCollisionStay2D(Collision2D other) {
+		print ("Stay: " + other.gameObject.name);
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		print ("Exit: " + other.gameObject.name);
+		--collisionCount;
 	}
 }

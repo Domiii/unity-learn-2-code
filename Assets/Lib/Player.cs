@@ -35,10 +35,9 @@ public class Player : MonoBehaviour {
 
 		body.velocity = v;
 
-		if (v.x!= 0) {
-			var scale = transform.localScale;
-			scale.x = Mathf.Sign (v.x) * Mathf.Abs(transform.localScale.x);
-			transform.localScale = scale;
+		if (v.x != 0) {
+			var dir = Mathf.Sign (v.x);
+			transform.rotation = Quaternion.Euler (0, 90 - dir * 90, 0);
 		}
 	}
 }
